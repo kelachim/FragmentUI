@@ -28,7 +28,7 @@ spec:
       initContainers:
       - name: git-clone
         image: alpine/git
-        command: ["git", "clone", "https://github.com/your-username/your-repo.git", "/app"]
+        command: ["git", "clone", "https://github.com/kelachim/FragmentUI.git", "/app"]
         volumeMounts:
         - name: app-volume
           mountPath: /app
