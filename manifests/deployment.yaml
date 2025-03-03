@@ -16,7 +16,8 @@ spec:
         - name: fragmentui
           image: node:18-alpine
           command: ["sh", "-c"]
-          args: ["npm install && npm start"]
+          args: ["cd /app && npm install && npm start"]
+          workingDir: /app
           ports:
             - containerPort: 3000
           volumeMounts:
