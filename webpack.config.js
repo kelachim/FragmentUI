@@ -2,27 +2,28 @@ const { ModuleFederationPlugin } = require('webpack').container;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/index.ts',  // Update to TypeScript entry
   output: {
     publicPath: 'auto',
+  },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js'],
   },
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.tsx?$/,
+        use: 'babel-loader',
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-        },
       },
     ],
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: 'uiLibrary',
+      name: 'fragmentUI',
       filename: 'remoteEntry.js',
       exposes: {
-        './Button': './src/Button.js',
+        './Button': './src/molecules/Button.tsx',  // Correct path to Button.tsx
       },
       shared: {
         react: { singleton: true },

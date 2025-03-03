@@ -1,34 +1,34 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ui-module-app
+  name: fragmentui
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ui-module-app
+      app: fragmentui
   template:
     metadata:
       labels:
-        app: ui-module-app
+        app: fragmentui
     spec:
       containers:
-      - name: ui-module-app
-        image: node:18-alpine
-        command: ["sh", "-c"]
-        args: ["cd /app && npm start"]
-        ports:
-        - containerPort: 3000
-        volumeMounts:
-        - name: app-volume
-          mountPath: /app
+        - name: fragmentui
+          image: node:18-alpine
+          workingDir: /app
+          command: ["npm", "start"] 
+          ports:
+            - containerPort: 3000
+          volumeMounts:
+            - name: app-volume
+              mountPath: /app
       volumes:
-      - name: app-volume
-        emptyDir: {}
-      initContainers:
-      - name: git-clone
-        image: alpine/git
-        command: ["git", "clone", "https://github.com/kelachim/FragmentUI.git", "/app"]
-        volumeMounts:
         - name: app-volume
-          mountPath: /app
+          emptyDir: {}
+      initContainers:
+        - name: git-clone
+          image: alpine/git
+          command: ["git", "clone", "https://github.com/kelachim/FragmentUI.git", "/app"]
+          volumeMounts:
+            - name: app-volume
+              mountPath: /app
