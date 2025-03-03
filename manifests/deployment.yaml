@@ -15,8 +15,8 @@ spec:
       containers:
         - name: fragmentui
           image: node:18-alpine
-          workingDir: /app
-          command: ["npm", "start"] 
+          command: ["sh", "-c"]
+          args: ["npm install && npm start"]
           ports:
             - containerPort: 3000
           volumeMounts:
@@ -28,7 +28,13 @@ spec:
       initContainers:
         - name: git-clone
           image: alpine/git
-          command: ["git", "clone", "https://github.com/kelachim/FragmentUI.git", "/app"]
+          command:
+            [
+              "git",
+              "clone",
+              "https://github.com/kelachim/FragmentUI.git",
+              "/app",
+            ]
           volumeMounts:
             - name: app-volume
               mountPath: /app
