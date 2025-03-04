@@ -2,7 +2,8 @@ const { ModuleFederationPlugin } = require('webpack').container;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.ts',  // Update to TypeScript entry
+  entry: './src/index.ts',
+  mode: 'development',
   output: {
     publicPath: 'auto',
   },
